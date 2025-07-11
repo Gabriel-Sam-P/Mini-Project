@@ -1,0 +1,858 @@
+{
+  "acData": [
+    {
+      "id": "1",
+      "product": "Ac",
+      "image": "/assets/Ac/1.jpg",
+      "company": "LG",
+      "model": "CoolTech 5000",
+      "price": "17999.99",
+      "category": "Electronics",
+      "description": "Powerful 15000 BTU window air conditioner with energy-saving features."
+    },
+    {
+      "id": "2",
+      "product": "Ac ",
+      "image": "/assets/Ac/2.jpg",
+      "company": "Daikin",
+      "model": "ClimateMaster Pro",
+      "price": "18299.00",
+      "category": "Electronics",
+      "description": "Advanced split-system AC with smart temperature control and quiet operation."
+    },
+    {
+      "id": "3",
+      "product": "Ac",
+      "image": "/assets/Ac/3.jpg",
+      "company": "Carrier",
+      "model": "Arctic Breeze 300",
+      "price": "20899",
+      "category": "Electronics",
+      "description": "Ductless mini-split AC with adjustable airflow and dehumidification."
+    },
+    {
+      "id": "4",
+      "product": "Ac",
+      "image": "/assets/Ac/4.jpg",
+      "company": "Voltas",
+      "model": "FrostFlow XL",
+      "price": "22299",
+      "category": "Electronics",
+      "description": "Portable evaporative cooler with large water tank for efficient cooling in dry climates."
+    },
+    {
+      "id": "5",
+      "product": "Ac",
+      "image": "/assets/Ac/5.jpg",
+      "company": "Whirlpool",
+      "model": "ChillGuard 800",
+      "price": "25649",
+      "category": "Electronics",
+      "description": "Energy-efficient window-mounted air conditioner with remote control."
+    },
+    {
+      "id": "6",
+      "product": "Ac",
+      "image": "/assets/Ac/6.jpg",
+      "company": "Lioyd",
+      "model": "EcoCool Smart+",
+      "price": "18999",
+      "category": "Electronics",
+      "description": "Wi-Fi connected smart AC that adapts to your cooling preferences and schedule."
+    },
+    {
+      "id": "7",
+      "product": "Ac",
+      "image": "/assets/Ac/7.jpg",
+      "company": "Mitsubishi",
+      "model": "SilentComfort 1200i",
+      "price": "18799",
+      "category": "Electronics",
+      "description": "Inverter technology AC with precise temperature control and energy efficiency."
+    },
+    {
+      "id": "8",
+      "product": "Ac",
+      "image": "/assets/Ac/8.jpg",
+      "company": "Hitachi",
+      "model": "EZCool Portable 400",
+      "price": "17399",
+      "category": "Electronics",
+      "description": "Easy-to-move portable air conditioner with quick installation and cooling."
+    },
+    {
+      "id": "9",
+      "product": "Ac",
+      "image": "/assets/Ac/9.jpg",
+      "company": "Lennox",
+      "model": "PureAir Ducted 6000",
+      "price": "24999",
+      "category": "Electronics",
+      "description": "Whole-house ducted AC system with advanced air purification technology."
+    },
+    {
+      "id": "10",
+      "product": "Ac",
+      "image": "/assets/Ac/10.jpg",
+      "company": "Panasonic",
+      "model": "WallMaster Pro 1800",
+      "price": "52549",
+      "category": "Electronics",
+      "description": "Wall-mounted AC with adjustable louvers and energy-saving features."
+    },
+    {
+      "id": "11",
+      "product": "Ac",
+      "image": "/assets/Ac/11.jpg",
+      "company": "Haier",
+      "model": "CoolWave Split 220",
+      "price": "36549",
+      "category": "Electronics",
+      "description": "High-performance split AC system with rapid cooling and remote control."
+    },
+    {
+      "id": "12",
+      "product": "Ac",
+      "image": "/assets/Ac/12.jpg",
+      "company": "Godrej",
+      "model": "ClimateCentral 5000",
+      "price": "32999",
+      "category": "Electronics",
+      "description": "Powerful central AC unit for large homes with zone-based temperature control."
+    }
+  ],
+  "computerData": [
+    {
+      "id": "1",
+      "product": "Computer",
+      "image": "/assets/Computers/1.jpg",
+      "company": "Dell",
+      "model": "Inspiron 15 3000",
+      "price": "38000",
+      "category": "Electronics",
+      "description": "A versatile laptop with powerful performance and a sleek design."
+    },
+    {
+      "id": "2",
+      "product": "Computer",
+      "image": "/assets/Computers/2.jpg",
+      "company": "HP",
+      "model": "Pavilion 27",
+      "price": "105999",
+      "category": "Electronics",
+      "description": "An all-in-one desktop PC with a large display and high-speed processing."
+    },
+    {
+      "id": "3",
+      "product": "Computer",
+      "image": "/assets/Computers/3.jpg",
+      "company": "Apple",
+      "model": "MacBook Air",
+      "price": "90999",
+      "category": "Electronics",
+      "description": "An ultrathin and lightweight laptop known for its portability and smooth performance."
+    },
+    {
+      "id": "4",
+      "product": "Computer",
+      "image": "/assets/Computers/4.jpg",
+      "company": "Lenovo",
+      "model": "IdeaPad Flex",
+      "price": "78999",
+      "category": "Electronics",
+      "description": "A flexible 2-in-1 laptop with touchscreen capabilities and powerful processing."
+    },
+    {
+      "id": "5",
+      "product": "Computer",
+      "image": "/assets/Computers/5.jpg",
+      "company": "Acer",
+      "model": "Predator Helios 300",
+      "price": "142999",
+      "category": "Electronics",
+      "description": "A gaming laptop with high-performance graphics and advanced cooling technology."
+    },
+    {
+      "id": "6",
+      "product": "Computer",
+      "image": "/assets/Computers/6.jpg",
+      "company": "Microsoft",
+      "model": "Surface Pro 7",
+      "price": "70999",
+      "category": "Electronics",
+      "description": "A versatile 2-in-1 tablet and laptop with a detachable keyboard and stylus support."
+    },
+    {
+      "id": "7",
+      "product": "Computer",
+      "image": "/assets/Computers/7.jpg",
+      "company": "Asus",
+      "model": "ZenBook 14",
+      "price": "60999",
+      "category": "Electronics",
+      "description": "A compact laptop with a premium build, strong performance, and long battery life."
+    },
+    {
+      "id": "8",
+      "product": "Computer",
+      "image": "/assets/Computers/8.jpg",
+      "company": "Alienware",
+      "model": "Aurora R10",
+      "price": "80000",
+      "category": "Electronics",
+      "description": "A high-end gaming desktop with customizable components and advanced graphics capabilities."
+    },
+    {
+      "id": "9",
+      "product": "Computer",
+      "image": "/assets/Computers/9.jpg",
+      "company": "HP",
+      "model": "EliteBook 840",
+      "price": "52999",
+      "category": "Electronics",
+      "description": "A business laptop with robust security features, reliable performance, and sleek design."
+    },
+    {
+      "id": "10",
+      "product": "Computer",
+      "image": "/assets/Computers/10.jpg",
+      "company": "Lenovo",
+      "model": "legion 5",
+      "price": "92000",
+      "category": "Electronics",
+      "description": "A compact and powerful gaming laptop suitable for gamers and online streamers."
+    },
+    {
+      "id": "11",
+      "product": "Computer",
+      "image": "/assets/Computers/11.jpg",
+      "company": "Dell",
+      "model": "XPS 13",
+      "price": "180499",
+      "category": "Electronics",
+      "description": "A premium ultrabook with a stunning display, strong performance, and sleek design."
+    },
+    {
+      "id": "12",
+      "product": "Computer",
+      "image": "/assets/Computers/12.jpg",
+      "company": "Acer",
+      "model": "Chromebook 14",
+      "price": "28000",
+      "category": "Electronics",
+      "description": "A lightweight and affordable laptop running on Chrome OS, ideal for web-based tasks."
+    }
+  ],
+  "fridgeData": [
+    {
+      "id": "1",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/1.jpg",
+      "company": "LG",
+      "model": "CoolFrost 5000",
+      "price": "22999",
+      "category": "Electronics",
+      "description": "A spacious and energy-efficient refrigerator with advanced cooling technology."
+    },
+    {
+      "id": "2",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/2.jpg",
+      "company": "Samsung",
+      "model": "FridgeMaster Pro",
+      "price": "18999",
+      "category": "Electronics",
+      "description": "A high-capacity refrigerator with smart features and precise temperature control."
+    },
+    {
+      "id": "3",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/3.jpg",
+      "company": "Whirlpool",
+      "model": "ChillZone 300",
+      "price": "20999",
+      "category": "Electronics",
+      "description": "A modern refrigerator with adjustable shelves and efficient cooling performance."
+    },
+    {
+      "id": "4",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/4.jpg",
+      "company": "Frigidaire",
+      "model": "CoolMist XL",
+      "price": "15999",
+      "category": "Electronics",
+      "description": "A spacious fridge with a water dispenser and innovative humidity control."
+    },
+    {
+      "id": "5",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/5.jpg",
+      "company": "KitchenAid",
+      "model": "FreezeGuard 800",
+      "price": "17999",
+      "category": "Electronics",
+      "description": "A premium refrigerator with customizable compartments and stylish design."
+    },
+    {
+      "id": "6",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/6.jpg",
+      "company": "GE",
+      "model": "SmartCool+",
+      "price": "11999",
+      "category": "Electronics",
+      "description": "A smart refrigerator with Wi-Fi connectivity and built-in voice assistant."
+    },
+    {
+      "id": "7",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/7.jpg",
+      "company": "Maytag",
+      "model": "IceMaster 1500",
+      "price": "13999",
+      "category": "Electronics",
+      "description": "A reliable refrigerator with spacious freezer and high-capacity ice maker."
+    },
+    {
+      "id": "8",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/8.jpg",
+      "brand": "Bosch",
+      "model": "FreshSense 400",
+      "price": "25999",
+      "category": "Electronics",
+      "description": "A European-style refrigerator with advanced temperature management and energy efficiency."
+    },
+    {
+      "id": "9",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/9.jpg",
+      "company": "Haier",
+      "model": "CoolWave French Door",
+      "price": "31699",
+      "category": "Electronics",
+      "description": "A French door refrigerator with sleek design and ample storage space."
+    },
+    {
+      "id": "10",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/10.jpg",
+      "company": "Sub-Zero",
+      "model": "ProChill 8000",
+      "price": "29999",
+      "category": "Electronics",
+      "description": "A high-end refrigerator with dual cooling zones and advanced preservation features."
+    },
+    {
+      "id": "11",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/11.jpg",
+      "company": "Kenmore",
+      "model": "Elite Series",
+      "price": "11999",
+      "category": "Electronics",
+      "description": "An energy-efficient refrigerator with modern features and elegant stainless steel finish."
+    },
+    {
+      "id": "12",
+      "product": "Refrigerator",
+      "image": "/assets/fridge/12.jpg",
+      "company": "Viking",
+      "model": "Professional Series",
+      "price": "41999",
+      "category": "Electronics",
+      "description": "A high-performance refrigerator designed for professional-grade kitchen environments."
+    }
+  ],
+  "mobileData": [
+    {
+      "id": "1",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/1.jpg",
+      "company": "Apple",
+      "model": "iPhone 12",
+      "price": "26000",
+      "category": "Electronics",
+      "description": "The latest iPhone model with advanced camera capabilities and powerful performance."
+    },
+    {
+      "id": "2",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/2.jpg",
+      "company": "Samsung",
+      "model": "Galaxy Z Fold 3",
+      "price": "89000",
+      "category": "Electronics",
+      "description": "A foldable smartphone with a large display and multitasking features."
+    },
+    {
+      "id": "3",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/3.jpg",
+      "company": "Google",
+      "model": "Pixel 6",
+      "price": "26999",
+      "category": "Electronics",
+      "description": "A Google Pixel phone with exceptional camera quality and the latest Android features."
+    },
+    {
+      "id": "4",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/4.jpg",
+      "company": "OnePlus",
+      "model": "9 Pro",
+      "price": "22000",
+      "category": "Electronics",
+      "description": "A flagship OnePlus phone known for its smooth performance and fast charging."
+    },
+    {
+      "id": "5",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/5.jpg",
+      "company": "Xiaomi",
+      "model": "Mi 11 Ultra",
+      "price": "33000",
+      "category": "Electronics",
+      "description": "A high-spec Xiaomi phone with a versatile camera system and powerful hardware."
+    },
+    {
+      "id": "6",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/6.jpg",
+      "company": "Sony",
+      "model": "Xperia 1 III",
+      "price": "35000",
+      "category": "Electronics",
+      "description": "A Sony Xperia phone with a 4K display and pro-level camera features."
+    },
+    {
+      "id": "7",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/7.jpg",
+      "company": "LG",
+      "model": "G9 ThinQ",
+      "price": "53000.",
+      "category": "Electronics",
+      "description": "An LG smartphone with AI-enhanced features and a sleek design."
+    },
+    {
+      "id": "8",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/8.jpg",
+      "company": "Motorola",
+      "model": "Edge 20",
+      "price": "35000",
+      "category": "Electronics",
+      "description": "A Motorola Edge phone with 5G capabilities and a high-refresh-rate display."
+    },
+    {
+      "id": "9",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/9.jpg",
+      "company": "Huawei",
+      "model": "P50 Pro",
+      "price": "30000",
+      "category": "Electronics",
+      "description": "A Huawei flagship phone with advanced camera technology and sleek aesthetics."
+    },
+    {
+      "id": "10",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/10.jpg",
+      "company": "Oppo",
+      "model": "Find X5 Pro",
+      "price": "80000",
+      "category": "Electronics",
+      "description": "An Oppo Find X phone with innovative design and impressive camera features."
+    },
+    {
+      "id": "11",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/11.jpg",
+      "company": "Nokia",
+      "model": "8.4 5G",
+      "price": "48000",
+      "category": "Electronics",
+      "description": "A Nokia smartphone with 5G connectivity and a focus on reliability."
+    },
+    {
+      "id": "12",
+      "product": "Mobile",
+      "image": "/assets/NewMobile/12.jpg",
+      "company": "Realme",
+      "model": "GT Master Edition",
+      "price": "27000",
+      "category": "Electronics",
+      "description": "A Realme phone designed in collaboration with a renowned designer, featuring a unique aesthetic."
+    }
+  ],
+  "tvData": [
+    {
+      "id": "1",
+      "product": "TV",
+      "image": "/assets/TV/1.jpg",
+      "company": "LG",
+      "model": "OLED CX Series",
+      "price": "40000",
+      "category": "Electronics",
+      "description": "A high-end OLED TV with stunning picture quality and smart features."
+    },
+    {
+      "id": "2",
+      "product": "TV",
+      "image": "/assets/TV/2.jpg",
+      "company": "Sony",
+      "model": "Bravia X90J",
+      "price": "45000",
+      "category": "Electronics",
+      "description": "A 4K LED TV with advanced processing and immersive audio technology."
+    },
+    {
+      "id": "3",
+      "product": "TV",
+      "image": "/assets/TV/3.jpg",
+      "company": "Samsung",
+      "model": "QLED Q80A",
+      "price": "62000",
+      "category": "Electronics",
+      "description": "A QLED TV with vibrant colors and impressive upscaling capabilities."
+    },
+    {
+      "id": "4",
+      "product": "TV",
+      "image": "/assets/TV/4.jpg",
+      "company": "TCL",
+      "model": "6-Series",
+      "price": "82000",
+      "category": "Electronics",
+      "description": "An affordable 4K TV with Dolby Vision HDR and Roku smart platform."
+    },
+    {
+      "id": "5",
+      "product": "TV",
+      "image": "/assets/TV/5.jpg",
+      "company": "Vizio",
+      "model": "P-Series Quantum",
+      "price": "50000",
+      "category": "Electronics",
+      "description": "A quantum dot 4K TV with high brightness and local dimming zones."
+    },
+    {
+      "id": "6",
+      "product": "TV",
+      "image": "/assets/TV/6.jpg",
+      "company": "Hisense",
+      "model": "U8G Series",
+      "price": "60000",
+      "category": "Electronics",
+      "description": "A ULED TV with impressive contrast and support for various HDR formats."
+    },
+    {
+      "id": "7",
+      "product": "TV",
+      "image": "/assets/TV/7.jpg",
+      "company": "Panasonic",
+      "model": "HZ2000",
+      "price": "72000",
+      "category": "Electronics",
+      "description": "A flagship OLED TV with customized professional-grade picture quality."
+    },
+    {
+      "id": "8",
+      "product": "TV",
+      "image": "/assets/TV/8.jpg",
+      "company": "Sharp",
+      "model": "Aquos R5G",
+      "price": "52000",
+      "category": "Electronics",
+      "description": "A 5G-compatible 4K TV with detailed images and advanced connectivity."
+    },
+    {
+      "id": "9",
+      "product": "TV",
+      "image": "/assets/TV/9.jpg",
+      "brand": "Philips",
+      "model": "Ambilight 4K",
+      "price": "64000",
+      "category": "Electronics",
+      "description": "A 4K TV with Ambilight technology, creating an immersive viewing experience."
+    },
+    {
+      "id": "10",
+      "product": "TV",
+      "image": "/assets/TV/10.jpg",
+      "company": "Sceptre",
+      "model": "X438BV-FSR",
+      "price": "70000",
+      "category": "Electronics",
+      "description": "An affordable full HD TV with basic features for everyday entertainment."
+    },
+    {
+      "id": "11",
+      "product": "TV",
+      "image": "/assets/TV/11.jpg",
+      "company": "Insignia",
+      "model": "Fire TV Edition",
+      "price": "68000",
+      "category": "Electronics",
+      "description": "A budget-friendly 4K TV with built-in Fire TV and Alexa voice control."
+    },
+    {
+      "id": "12",
+      "product": "TV",
+      "image": "/assets/TV/12.jpg",
+      "company": "Samsung",
+      "model": "The Frame",
+      "price": "92000",
+      "category": "Electronics",
+      "description": "A TV that doubles as a piece of art, seamlessly blending into your decor."
+    }
+  ],
+  "watchData": [
+    {
+      "id": "1",
+      "product": "Watch",
+      "image": "/assets/Watch/1.png",
+      "company": "Apple",
+      "model": "Watch Series 7",
+      "price": "24000",
+      "category": "Wearable",
+      "description": "The latest Apple Watch with a larger display and advanced health features."
+    },
+    {
+      "id": "2",
+      "product": "Watch",
+      "image": "/assets/Watch/2.jpg",
+      "company": "Samsung",
+      "model": "Galaxy Watch 4",
+      "price": "20000",
+      "category": "Wearable",
+      "description": "A Samsung smartwatch with comprehensive health tracking and versatile design."
+    },
+    {
+      "id": "3",
+      "product": "Watch",
+      "image": "/assets/Watch/3.jpg",
+      "company": "Fitbit",
+      "model": "Versa 3",
+      "price": "14000",
+      "category": "Wearable",
+      "description": "A Fitbit smartwatch with built-in GPS and fitness tracking capabilities."
+    },
+    {
+      "id": "4",
+      "product": "Watch",
+      "image": "/assets/Watch/4.jpg",
+      "company": "Garmin",
+      "model": "Forerunner 945",
+      "price": "18000",
+      "category": "Wearable",
+      "description": "A high-end Garmin GPS watch designed for serious athletes and outdoor enthusiasts."
+    },
+    {
+      "id": "5",
+      "product": "Watch",
+      "image": "/assets/Watch/5.jpg",
+      "company": "Fossil",
+      "model": "Gen 5",
+      "price": "17000",
+      "category": "Wearable",
+      "description": "A stylish Fossil smartwatch with Wear OS and customizable watch faces."
+    },
+    {
+      "id": "6",
+      "product": "Watch",
+      "image": "/assets/Watch/6.jpg",
+      "company": "Casio",
+      "model": "G-Shock GA-2100",
+      "price": "22000",
+      "category": "Wearable",
+      "description": "A rugged and iconic G-Shock watch with a modern and slim design."
+    },
+    {
+      "id": "7",
+      "product": "Watch",
+      "image": "/assets/Watch/7.jpg",
+      "company": "TAG Heuer",
+      "model": "Carrera Calibre Heuer 02",
+      "price": "30000",
+      "category": "Luxury",
+      "description": "A luxurious TAG Heuer mechanical watch with a sporty and sophisticated design."
+    },
+    {
+      "id": "8",
+      "product": "Watch",
+      "image": "/assets/Watch/8.jpg",
+      "company": "Timex",
+      "model": "Weekender Chronograph",
+      "price": "22000",
+      "category": "Wearable",
+      "description": "A versatile Timex watch with a chronograph function and interchangeable straps."
+    },
+    {
+      "id": "9",
+      "product": "Watch",
+      "image": "/assets/Watch/9.jpg",
+      "company": "Citizen",
+      "model": "Eco-Drive Promaster",
+      "price": "20000",
+      "category": "Wearable",
+      "description": "A Citizen watch powered by light with durable construction for outdoor adventures."
+    },
+    {
+      "id": "10",
+      "product": "Watch",
+      "image": "/assets/Watch/10.jpg",
+      "company": "Seiko",
+      "model": "SKX007",
+      "price": "8000",
+      "category": "Wearable",
+      "description": "A classic Seiko diver's watch known for its reliability and timeless design."
+    },
+    {
+      "id": "11",
+      "product": "Watch",
+      "image": "/assets/Watch/11.jpg",
+      "company": "Michael Kors",
+      "model": "Access Lexington 2",
+      "price": "40000",
+      "category": "Wearable",
+      "description": "A Michael Kors smartwatch with a luxurious look and smart functionalities."
+    },
+    {
+      "id": "12",
+      "product": "Watch",
+      "image": "/assets/Watch/12.jpg",
+      "company": "Huawei",
+      "model": "Watch GT 3",
+      "price": "45000",
+      "category": "Wearable",
+      "description": "A Huawei smartwatch with long battery life and health monitoring features."
+    }
+  ],
+  "User": [
+    {
+      "id": "7db7",
+      "firstName": "sam",
+      "lastName": "raj",
+      "mobile": "9698826426",
+      "email": "samraj27@gmail.com",
+      "username": "samraj",
+      "password": "samraj1234"
+    },
+    {
+      "id": "4e06",
+      "firstName": "gabriel",
+      "lastName": "samraj",
+      "mobile": "8637491320",
+      "email": "Gabrielsam12@gmail.com",
+      "username": "gabrielsamuel",
+      "password": "gabriel123496"
+    }
+  ],
+  "wishlist": [],
+  "cart": [],
+  "checkorder": [
+    {
+      "id": "96df",
+      "items": [
+        {
+          "id": "321f",
+          "product": "Computer",
+          "image": "/assets/Computers/2.jpg",
+          "company": "HP",
+          "model": "Pavilion 27",
+          "price": "105999",
+          "category": "Electronics",
+          "description": "An all-in-one desktop PC with a large display and high-speed processing.",
+          "username": "gabrielsamuel",
+          "quantity": 1
+        },
+        {
+          "id": "e61f",
+          "product": "Mobile",
+          "image": "/assets/NewMobile/5.jpg",
+          "company": "Xiaomi",
+          "model": "Mi 11 Ultra",
+          "price": "33000",
+          "category": "Electronics",
+          "description": "A high-spec Xiaomi phone with a versatile camera system and powerful hardware.",
+          "username": "gabrielsamuel",
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "product": "Watch",
+          "image": "/assets/Watch/3.jpg",
+          "company": "Fitbit",
+          "model": "Versa 3",
+          "price": "14000",
+          "category": "Wearable",
+          "description": "A Fitbit smartwatch with built-in GPS and fitness tracking capabilities.",
+          "username": "samraj",
+          "quantity": 2
+        },
+        {
+          "id": "1",
+          "product": "Watch",
+          "image": "/assets/Watch/1.png",
+          "company": "Apple",
+          "model": "Watch Series 7",
+          "price": "24000",
+          "category": "Wearable",
+          "description": "The latest Apple Watch with a larger display and advanced health features.",
+          "username": "samraj",
+          "quantity": 2
+        }
+      ],
+      "paymentMethod": "cod",
+      "total": 206404,
+      "createdAt": "2025-07-10T06:47:37.816Z"
+    },
+    {
+      "id": "fa2f",
+      "items": [
+        {
+          "id": "2",
+          "product": "Mobile",
+          "image": "/assets/NewMobile/2.jpg",
+          "company": "Samsung",
+          "model": "Galaxy Z Fold 3",
+          "price": "89000",
+          "category": "Electronics",
+          "description": "A foldable smartphone with a large display and multitasking features.",
+          "username": "samraj",
+          "quantity": 2
+        },
+        {
+          "id": "3",
+          "product": "Mobile",
+          "image": "/assets/NewMobile/3.jpg",
+          "company": "Google",
+          "model": "Pixel 6",
+          "price": "26999",
+          "category": "Electronics",
+          "description": "A Google Pixel phone with exceptional camera quality and the latest Android features.",
+          "username": "samraj",
+          "quantity": 2
+        },
+        {
+          "id": "d22e",
+          "product": "Mobile",
+          "image": "/assets/NewMobile/1.jpg",
+          "company": "Apple",
+          "model": "iPhone 12",
+          "price": "26000",
+          "category": "Electronics",
+          "description": "The latest iPhone model with advanced camera capabilities and powerful performance.",
+          "username": "samraj",
+          "quantity": 2
+        }
+      ],
+      "paymentMethod": "cod",
+      "total": 272643,
+      "createdAt": "2025-07-10T06:50:46.433Z"
+    }
+  ]
+}
