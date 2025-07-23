@@ -102,17 +102,17 @@ const CombinedNavbar = () => {
   return (
     <>
       {/* Sticky AppBar */}
-      <AppBar position="fixed" sx={{ background: 'linear-gradient(to bottom, #000066 0%, #0000cc 100%)' }}>
-        <Toolbar sx={{ justifyContent: 'space-between', height: '100px' }}>
+      <AppBar position="fixed" sx={{height: {lg:'120px',md:'100px',sm:'80px',xs:'80px'},background: 'linear-gradient(to bottom, #000066 0%, #0000cc 100%)' }}>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', color: 'white' }}>
-              <Typography variant="h3" style={{ fontFamily: 'Rubik Gemstones, system-ui', fontWeight: 400 }}>E-Cart</Typography>
+              <Typography variant="body2" sx={{ fontFamily: 'Rubik Gemstones, system-ui', fontSize:{lg:60,md:40,sm:30,xs:30} }}>E-Cart</Typography>
               <Typography variant="subtitle1" sx={{ fontStyle: 'italic', marginTop: '-4px' }}>Online Shopping</Typography>
             </Box>
           </Link>
 
           {!isMobile && (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, border: '1px solid #00FFFF', borderRadius: '8px', bgcolor: '#fff', px: 1, py: 0.5, width: { lg: 400, md: 300 } }}>
+            <Box sx={{display: 'flex', alignItems: 'center', gap: 1, border: '1px solid #00FFFF', borderRadius: '8px', bgcolor: '#fff', px: 1, py: 0.5, width: { lg: 400, md: 300 } }}>
               <InputBase
                 placeholder="Search..."
                 value={searchTerm}
@@ -190,7 +190,7 @@ const CombinedNavbar = () => {
       </AppBar>
 
       {/* Spacer below fixed navbar */}
-      <Box sx={{ height: '100px' }} />
+      <Box sx={{ height:{lg:'120px',md:'100px',sm:'80px',xs:'80px'} }} />
 
       {/* Mobile Search UI */}
       {showMobileSearch && isMobile && (

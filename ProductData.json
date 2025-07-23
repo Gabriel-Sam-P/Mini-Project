@@ -752,7 +752,32 @@
     }
   ],
   "wishlist": [],
-  "cart": [],
+  "cart": [
+    {
+      "id": "1",
+      "product": "Ac",
+      "image": "/assets/Ac/1.jpg",
+      "company": "LG",
+      "model": "CoolTech 5000",
+      "price": "17999.99",
+      "category": "Electronics",
+      "description": "Powerful 15000 BTU window air conditioner with energy-saving features.",
+      "username": "gabrielsamuel",
+      "quantity": 1
+    },
+    {
+      "id": "9915",
+      "product": "Ac ",
+      "image": "/assets/Ac/2.jpg",
+      "company": "Daikin",
+      "model": "ClimateMaster Pro",
+      "price": "18299.00",
+      "category": "Electronics",
+      "description": "Advanced split-system AC with smart temperature control and quiet operation.",
+      "username": "gabrielsamuel",
+      "quantity": 1
+    }
+  ],
   "checkorder": [
     {
       "id": "96df",

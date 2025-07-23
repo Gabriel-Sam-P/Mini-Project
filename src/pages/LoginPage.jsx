@@ -1,175 +1,136 @@
-import { AccountCircle, Close, Password, Visibility, VisibilityOff } from '@mui/icons-material'
-import { Alert, Box, Button, FilledInput, Grid, IconButton, InputAdornment, Snackbar, TextField } from '@mui/material'
-import React, { useState } from 'react'
-import 'animate.css';
-
+import { AccountCircle, Close, Password, Visibility, VisibilityOff } from '@mui/icons-material';
+import {
+  Alert, Box, Button, FilledInput, Grid, IconButton,
+  InputAdornment, Snackbar, TextField
+} from '@mui/material';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import 'animate.css';
 
-export const LoginPage = () => {
-  const navigate = useNavigate()
-  const [username,setUsername]=useState('')
-  const [password,setPassword]=useState('')
-  const [error,setError] = useState('')
-  // password visibility
-  const [showPassword,setShowPassword] = useState(false)
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  // snackbar
-  const [open,setOpen]=useState(false)
-  const openSnackbar = () => {
-    setOpen(true)
-  }
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword(show => !show);
+  const openSnackbar = () => setOpen(true);
   const closeSnackbar = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+    setError('');
+  };
+
   const handleLogin = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/User')
-      const users = Object.entries(response.data).map(([key,val])=>({
-        firebaseKey: key,...val
-      }))
-      const userdata = users.find(user=>
-        ((user.username===username || user.mobile===username || user.email===username) && 
-        (user.password===password)))
-      if(userdata){
-        localStorage.setItem('loggedIn','true')
-        localStorage.setItem('username',username)
-        navigate('/')
+      const response = await axios.get('https://e-cart-by-gabriel-default-rtdb.firebaseio.com/User.json');
+      const users = response.data ? Object.entries(response.data).map(([key, val]) => ({ firebaseKey: key, ...val })) : [];
+
+      const userData = users.find(user =>
+        (user.username === username || user.mobile === username || user.email === username) &&
+        (user.password === password)
+      );
+
+      if (userData) {
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('username', userData.username);
+        navigate('/');
         window.dispatchEvent(new Event('storage'));
-        openSnackbar()
+        openSnackbar();
       } else {
-        setError('Invalid credentials')
-        openSnackbar()
+        setError('Invalid credentials');
+        openSnackbar();
       }
-    } catch (error) {
-      console.error(error.message)
-      setError(error.message)
-      openSnackbar()
+    } catch (err) {
+      console.error(err.message);
+      setError('Login failed');
+      openSnackbar();
     }
-  }
+  };
+
   return (
-    <Grid container>
-      <Grid size={{lg:9,md:9,sm:9,xs:12}}>
-        <Box sx={{height:{lg:'320px',md:'320px',sm:'270px',xs:'270px'},paddingTop:{lg:'80px',md:'80px',sm:'30px',xs:'30px'},marginLeft:{lg:35,md:30,sm:25}}}>
-          <Box className='animate__animated animate__backInDown' sx={{display:'flex',justifyContent:'center',gap:'12px'}}>
-            <AccountCircle sx={{mt:1.5,height:"50px",width:'50px'}}/>
-            <TextField size="small" 
-            variant='filled' 
-            label='username or email or mobile'
-            value={username}
-            onChange={(e)=>setUsername(e.target.value)}
-            sx={{
-              marginTop: '10px',
-              width: '60%',
-              backgroundColor: 'darkblue',
-              borderRadius: '8px',
-              '& .MuiFilledInput-root': {
-                minHeight: '54px',
-                alignItems: 'center',
-              },
-              '& .MuiFilledInput-input': {
-                color: '#00FFE7'
-              },
-              '& .MuiInputLabel-root': {
-                color: '#A0A0A0',
-              },
-              '& .MuiFilledInput-underline:before': {
-                borderBottomColor: '#00FFE7',
-              },
-              '& .MuiFilledInput-underline:after': {
-                borderBottomColor: '#FF4D6D',
-              },
-            }}
-            />
+    <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '100vh',background: "linear-gradient(to bottom, #00ff99 0%, #3366cc 100%)"}}>
+      <Grid item xs={12} sm={9} md={6} lg={5}>
+        <Box sx={{ padding: { xs: 3, sm: 5 }, bgcolor: '#121B2B', borderRadius: 2 }}>
+          <Box className="animate__animated animate__backInDown" sx={{ mb: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <AccountCircle sx={{ color: '#00FFE7', fontSize: 50 }} />
+              <TextField
+                variant="filled"
+                fullWidth
+                label="Username, Email or Mobile"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                sx={{
+                  backgroundColor: 'darkblue',
+                  borderRadius: 1,
+                  '& .MuiFilledInput-input': { color: '#00FFE7' },
+                  '& .MuiInputLabel-root': { color: '#A0A0A0' }
+                }}
+              />
+            </Box>
           </Box>
-          <Box className='animate__animated animate__backInDown' sx={{display:'flex',justifyContent:'center',gap:'12px'}}>
-            <Password sx={{mt:1.5,height:"50px",width:'50px'}}/>
-            <TextField  
-            variant='filled' 
-            label='Password'
-            type={showPassword ? 'text' : 'password'}
-            slots={{
-              input: FilledInput,
-            }}
-            slotProps={{
-              input:{
-                type: showPassword ? 'text' : 'password',
-                endAdornment: (
-                  <InputAdornment>
-                    <IconButton
-                      onClick={handleClickShowPassword}
-                      edge='end'
-                      sx={{height:"40px",width:'40px',color:'#A0A0A0'}}
-                    >
-                      {showPassword ? <VisibilityOff/> : <Visibility/>}
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }
-            }}
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-            sx={{
-              marginTop: '10px',
-              width: '60%',
-              backgroundColor: 'darkblue',
-              borderRadius: '8px',
-              '& .MuiFilledInput-root': {
-                minHeight: '48px',
-                alignItems: 'center',
-              },
-              '& .MuiFilledInput-input': {
-                color: '#00FFE7',
-              },
-              '& .MuiInputLabel-root': {
-                color: '#A0A0A0',
-              },
-              '& .MuiFilledInput-underline:before': {
-                borderBottomColor: '#00FFE7',
-              },
-              '& .MuiFilledInput-underline:after': {
-                borderBottomColor: '#FF4D6D',
-              },
-            }}
-            />
+
+          <Box className="animate__animated animate__backInDown" sx={{ mb: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Password sx={{ color: '#00FFE7', fontSize: 50 }} />
+              <TextField
+                variant="filled"
+                fullWidth
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleClickShowPassword} sx={{ color: '#A0A0A0' }}>
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  backgroundColor: 'darkblue',
+                  borderRadius: 1,
+                  '& .MuiFilledInput-input': { color: '#00FFE7' },
+                  '& .MuiInputLabel-root': { color: '#A0A0A0' }
+                }}
+              />
+            </Box>
           </Box>
-          <Box className='animate__animated animate__fadeInTopLeft' sx={{display:'flex',justifyContent:'center'}}>
-            <Button variant='contained' onClick={handleLogin}
-            sx={{
-              ml:6,mt:2,
+
+          <Box className="animate__animated animate__fadeInTopLeft" sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+            <Button variant="contained" fullWidth onClick={handleLogin} sx={{
               backgroundColor: '#FF4D6D',
-              color: '#121B2B', 
+              color: '#121B2B',
               fontWeight: 'bold',
-              '&:hover': {
-                backgroundColor: '#e04360'
-              }
+              '&:hover': { backgroundColor: '#e04360' }
             }}>
               Login
             </Button>
           </Box>
-          <Box className='animate__animated animate__fadeInTopLeft' sx={{ml:6,display:'flex',justifyContent:'center',padding:'10px',}}>
-            <Link style={{color:'#121B2B'}} to='/Signup'>New user? Sign up</Link>
+
+          <Box className="animate__animated animate__fadeInTopLeft" sx={{ textAlign: 'center' }}>
+            <Link to="/Signup" style={{ color: '#00FFE7' }}>New user? Sign up</Link>
           </Box>
-          <Snackbar open={open} autoHideDuration={5000} onClose={closeSnackbar}
-          sx={{
-            backgroundColor: error ? '#FF4D6D' : '#00FFE7',
-            color: '#121B2B',
-            fontWeight: 'bold'
-          }}
-          action={
-            <IconButton size="small" aria-label="close" color='inherit' onClick={closeSnackbar}>
-              <Close fontSize='small'/>
-            </IconButton>
-          }>
-            <Alert severity={error ? 'error' : 'success'} onClose={closeSnackbar}>
-              {error || "Logged in successfully"}
-            </Alert>
-          </Snackbar>
         </Box>
+
+        <Snackbar
+          open={open}
+          autoHideDuration={4000}
+          onClose={closeSnackbar}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        >
+          <Alert severity={error ? 'error' : 'success'} variant="filled" onClose={closeSnackbar}>
+            {error || 'Logged in successfully'}
+          </Alert>
+        </Snackbar>
       </Grid>
-
     </Grid>
-  )
-}
-export default LoginPage;
+  );
+};
 
+export default LoginPage;

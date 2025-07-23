@@ -9,13 +9,15 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+const firebaseBaseURL = 'https://e-cart-by-gabriel-default-rtdb.firebaseio.com';
+
 const endpoints = [
-  'http://localhost:3001/mobileData',
-  'http://localhost:3001/acData',
-  'http://localhost:3001/computerData',
-  'http://localhost:3001/fridgeData',
-  'http://localhost:3001/tvData',
-  'http://localhost:3001/watchData',
+  `${firebaseBaseURL}/mobileData.json`,
+  `${firebaseBaseURL}/acData.json`,
+  `${firebaseBaseURL}/computerData.json`,
+  `${firebaseBaseURL}/fridgeData.json`,
+  `${firebaseBaseURL}/tvData.json`,
+  `${firebaseBaseURL}/watchData.json`,
 ];
 
 const SearchPage = () => {
@@ -40,8 +42,12 @@ const SearchPage = () => {
       if (!username) return;
 
       try {
-        const { data: wishlist } = await axios.get('http://localhost:3001/wishlist');
-        const filtered = wishlist.filter(item => item.username === username);
+        const { data } = await axios.get(`${firebaseBaseURL}/wishlist.json`);
+        const entries = data ? Object.entries(data) : [];
+        const filtered = entries
+          .map(([id, item]) => ({ id, ...item }))
+          .filter(item => item.username === username);
+
         setWishlistItems(filtered);
         setCurrentUser({ username });
       } catch (error) {
@@ -63,7 +69,7 @@ const SearchPage = () => {
 
       try {
         const responses = await Promise.all(endpoints.map(url => axios.get(url)));
-        const combined = responses.flatMap(res => res.data);
+        const combined = responses.flatMap(res => Object.values(res.data || {}));
 
         const filtered = combined.filter(item => {
           const model = item.model?.toLowerCase() || '';
@@ -88,11 +94,9 @@ const SearchPage = () => {
     fetchProducts();
   }, [query, category]);
 
-  // Check if product is in wishlist
   const isInWishlist = (item) =>
     wishlistItems.some(w => w.model === item.model && w.username === currentUser?.username);
 
-  // Add to cart
   const handleAddToCart = async (item) => {
     if (!currentUser) {
       setSnackbar({ open: true, message: 'Please log in to add items to cart.', severity: 'warning' });
@@ -101,7 +105,7 @@ const SearchPage = () => {
 
     try {
       const cartItem = { ...item, username: currentUser.username, quantity: 1 };
-      await axios.post('http://localhost:3001/cart', cartItem);
+      await axios.post(`${firebaseBaseURL}/cart.json`, cartItem);
       setSnackbar({ open: true, message: 'Item added to cart!', severity: 'success' });
       window.dispatchEvent(new Event('updateCounts'));
     } catch (err) {
@@ -110,7 +114,6 @@ const SearchPage = () => {
     }
   };
 
-  // Toggle wishlist
   const toggleWishlist = async (item) => {
     if (!currentUser) {
       setSnackbar({ open: true, message: 'Please log in to manage wishlist.', severity: 'warning' });
@@ -119,20 +122,21 @@ const SearchPage = () => {
 
     try {
       const exists = isInWishlist(item);
+
       if (exists) {
-        const { data: wishlist } = await axios.get('http://localhost:3001/wishlist');
-        const match = wishlist.find(w => w.model === item.model && w.username === currentUser.username);
+        const match = wishlistItems.find(w => w.model === item.model && w.username === currentUser.username);
         if (match) {
-          await axios.delete(`http://localhost:3001/wishlist/${match.id}`);
+          await axios.delete(`${firebaseBaseURL}/wishlist/${match.id}.json`);
           setWishlistItems(prev => prev.filter(w => w.id !== match.id));
           setSnackbar({ open: true, message: 'Removed from wishlist.', severity: 'info' });
         }
       } else {
         const newItem = { ...item, username: currentUser.username };
-        const { data } = await axios.post('http://localhost:3001/wishlist', newItem);
-        setWishlistItems(prev => [...prev, data]);
+        const { data } = await axios.post(`${firebaseBaseURL}/wishlist.json`, newItem);
+        setWishlistItems(prev => [...prev, { id: data.name, ...newItem }]);
         setSnackbar({ open: true, message: 'Added to wishlist!', severity: 'success' });
       }
+
       window.dispatchEvent(new Event('updateCounts'));
     } catch (error) {
       console.error('Wishlist toggle error:', error);
@@ -141,7 +145,7 @@ const SearchPage = () => {
   };
 
   return (
-    <Box sx={{ p: { xs: 2, sm: 4 },background:"linear-gradient(to top, #00ff99 0%, #3366cc 100%)"}}  >
+    <Box sx={{ p: { xs: 2, sm: 4 }, background: "linear-gradient(to top, #00ff99 0%, #3366cc 100%)" }}>
       <Typography variant="h4" gutterBottom>
         Search Results for "{queryParam}" {category && `(Category: ${category})`}
       </Typography>
@@ -157,23 +161,21 @@ const SearchPage = () => {
           {allProducts.map((item, idx) => {
             const favorite = isInWishlist(item);
             return (
-              <Grid size ={{xs:12,sm:6,md:4,lg:3}}  className='animate__animated animate__backInDown' key={idx}>
-                <Card sx={{ maxWidth: 245, mx: 'auto',borderRadius:'10px' }}>
+              <Grid item xs={12} sm={6} md={4} lg={3} className="animate__animated animate__backInDown" key={idx}>
+                <Card sx={{ maxWidth: 245, mx: 'auto', borderRadius: '10px' }}>
                   <CardMedia
                     component="img"
                     image={item.image || '/assets/fallback.jpg'}
                     alt={item.model}
                     onError={(e) => { e.target.src = '/assets/fallback.jpg'; }}
-                    sx={{height:200, objectFit: 'contain', mt:2 }}
+                    sx={{ height: 200, objectFit: 'contain', mt: 2 }}
                   />
-                  <CardContent 
-                          sx={{
-                              justifyContent: 'center',
-                              flexDirection: 'column',
-                              color: 'black',
-                              background: 'linear-gradient(to bottom, #ffffcc 0%, #00ffff 100%)',
-                            }}
-                  >
+                  <CardContent sx={{
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    color: 'black',
+                    background: 'linear-gradient(to bottom, #ffffcc 0%, #00ffff 100%)',
+                  }}>
                     <Typography variant="h6">{item.company}</Typography>
                     <Typography variant="body2">{item.model}</Typography>
                     <Typography variant="body1" color="primary">₹{item.price}</Typography>

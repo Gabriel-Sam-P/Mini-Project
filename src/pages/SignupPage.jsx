@@ -53,34 +53,37 @@ const SignupPage = () => {
     }
 
     try {
-      const res = await axios.get('http://localhost:3001/User');
-      const existingUser = res.data.find(user =>
+      const res = await axios.get('https://e-cart-by-gabriel-default-rtdb.firebaseio.com/User.json');
+      const users = res.data || {};
+
+      const exists = Object.values(users).some(user =>
         user.email === formData.email ||
         user.username === formData.username ||
         user.mobile === formData.mobile
       );
 
-      if (existingUser) {
+      if (exists) {
         setSnackbar({ open: true, message: 'User already exists with same email, mobile or username', severity: 'error' });
         return;
       }
 
-      await axios.post('http://localhost:3001/User', formData);
+      await axios.post('https://e-cart-by-gabriel-default-rtdb.firebaseio.com/User.json', formData);
 
       localStorage.setItem('loggedIn', 'true');
       localStorage.setItem('username', formData.username);
-      window.dispatchEvent(new Event('storage')); // for navbar sync
+      window.dispatchEvent(new Event('storage'));
 
       setSnackbar({ open: true, message: 'Signup & Login successful!', severity: 'success' });
 
       setTimeout(() => navigate('/'), 1500);
     } catch (error) {
+      console.error(error);
       setSnackbar({ open: true, message: 'Signup failed. Try again.', severity: 'error' });
     }
   };
 
   return (
-    <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '100vh', bgcolor: '#f0f2f5' }}>
+    <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '100vh', background: "linear-gradient(to bottom, #00ff99 0%, #3366cc 100%)" }}>
       <Paper elevation={4} sx={{ p: 4, width: 400 }}>
         <Typography variant="h5" gutterBottom textAlign="center">
           Sign Up
@@ -95,7 +98,7 @@ const SignupPage = () => {
               { label: 'Username', name: 'username' },
               { label: 'Password', name: 'password', type: 'password' }
             ].map((field) => (
-              <Grid size={{lg:12,md:12,sm:12,xs:12}} key={field.name}>
+              <Grid item xs={12} key={field.name}>
                 <TextField
                   fullWidth
                   label={field.label}
@@ -106,7 +109,7 @@ const SignupPage = () => {
                 />
               </Grid>
             ))}
-            <Grid  size={{lg:12,md:12,sm:12,xs:12}}>
+            <Grid item xs={12}>
               <Button fullWidth variant="contained" color="primary" type="submit">
                 Sign Up
               </Button>

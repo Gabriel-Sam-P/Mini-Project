@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
+  const [userKey, setUserKey] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({});
@@ -17,27 +18,33 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
       const loggedInUsername = localStorage.getItem('username');
 
-      if (!isLoggedIn || !loggedInUsername) {
+      if (!loggedIn || !loggedInUsername) {
         setUser(null);
         setLoading(false);
         return;
       }
 
       try {
-        const response = await axios.get('http://localhost:3001/User');
-        const currentUser = response.data.find(user => user.username === loggedInUsername);
+        const res = await axios.get('https://e-cart-by-gabriel-default-rtdb.firebaseio.com/User.json');
+        const users = res.data;
 
-        if (currentUser) {
-          setUser(currentUser);
-          setFormData(currentUser);
+        if (users) {
+          const key = Object.keys(users).find(k => users[k].username === loggedInUsername);
+          if (key) {
+            setUser(users[key]);
+            setUserKey(key);
+            setFormData(users[key]);
+          } else {
+            setUser(null);
+          }
         } else {
           setUser(null);
         }
-      } catch (error) {
-        console.error('Error fetching user:', error);
+      } catch (err) {
+        console.error('Error fetching user from Firebase:', err);
       } finally {
         setLoading(false);
       }
@@ -52,27 +59,30 @@ const ProfilePage = () => {
   };
 
   const handleSave = async () => {
+    if (!userKey) return;
+
     try {
-      await axios.put(`http://localhost:3001/User/${user.id}`, formData);
+      await axios.put(`https://e-cart-by-gabriel-default-rtdb.firebaseio.com/User/${userKey}.json`, formData);
       setUser(formData);
       setEditMode(false);
 
-      // update username in localStorage if it was changed
       if (user.username !== formData.username) {
         localStorage.setItem('username', formData.username);
       }
-    } catch (error) {
-      console.error('Error updating user:', error);
+    } catch (err) {
+      console.error('Error updating profile:', err);
     }
   };
 
   const handleDelete = async () => {
+    if (!userKey) return;
+
     try {
-      await axios.delete(`http://localhost:3001/User/${user.id}`);
+      await axios.delete(`https://e-cart-by-gabriel-default-rtdb.firebaseio.com/User/${userKey}.json`);
       localStorage.clear();
       navigate('/Signup');
-    } catch (error) {
-      console.error('Error deleting user:', error);
+    } catch (err) {
+      console.error('Error deleting user:', err);
     }
   };
 
@@ -87,13 +97,13 @@ const ProfilePage = () => {
   if (!user) {
     return (
       <Box sx={{ textAlign: 'center', mt: 4 }}>
-        <Typography variant="h6">Please login to view your profile.</Typography>
+        <Typography variant="h6">Please log in to view your profile.</Typography>
       </Box>
     );
   }
 
   return (
-    <Box sx={{ p: 4, maxWidth: 600, mx: 'auto' }}>
+    <Box sx={{ p: 4, maxWidth: 600, mx: 'auto' , background: "linear-gradient(to bottom, #00ff99 0%, #3366cc 100%)" }}>
       <Typography variant="h4" gutterBottom align="center">
         My Profile
       </Typography>
@@ -131,7 +141,6 @@ const ProfilePage = () => {
               </Grid>
             ))}
 
-            {/* Password Field */}
             <Grid item xs={6}>
               <Typography variant="subtitle2" color="text.secondary">Password</Typography>
               {editMode ? (
@@ -147,7 +156,7 @@ const ProfilePage = () => {
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
-                          onClick={() => setShowPassword((prev) => !prev)}
+                          onClick={() => setShowPassword(prev => !prev)}
                           edge="end"
                         >
                           {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -162,29 +171,19 @@ const ProfilePage = () => {
             </Grid>
           </Grid>
 
-          {/* Buttons */}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
             {editMode ? (
               <>
-                <Button variant="contained" color="primary" onClick={handleSave}>
-                  Save
-                </Button>
-                <Button variant="outlined" color="secondary" onClick={() => {
-                  setFormData(user);
-                  setEditMode(false);
-                }}>
+                <Button variant="contained" color="primary" onClick={handleSave}>Save</Button>
+                <Button variant="outlined" color="secondary" onClick={() => { setFormData(user); setEditMode(false); }}>
                   Cancel
                 </Button>
               </>
             ) : (
-              <Button variant="contained" color="primary" onClick={() => setEditMode(true)}>
-                Edit
-              </Button>
+              <Button variant="contained" color="primary" onClick={() => setEditMode(true)}>Edit</Button>
             )}
 
-            <Button variant="outlined" color="error" onClick={handleDelete}>
-              Delete Account
-            </Button>
+            <Button variant="outlined" color="error" onClick={handleDelete}>Delete Account</Button>
           </Box>
         </CardContent>
       </Card>

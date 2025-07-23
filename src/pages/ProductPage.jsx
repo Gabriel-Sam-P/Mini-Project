@@ -14,22 +14,30 @@ import {
   Snackbar,
   Alert,
 } from '@mui/material';
-import 'animate.css';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { CartWishlistContext } from './WishlistContext';
+import 'animate.css';
 
 const apiEndpoints = {
-  mobiles: 'http://localhost:3001/mobileData',
-  acs: 'http://localhost:3001/acData',
-  computers: 'http://localhost:3001/computerData',
-  fridges: 'http://localhost:3001/fridgeData',
-  tvs: 'http://localhost:3001/tvData',
-  watches: 'http://localhost:3001/watchData',
+  mobiles: 'https://e-cart-by-gabriel-default-rtdb.firebaseio.com/mobileData.json',
+  acs: 'https://e-cart-by-gabriel-default-rtdb.firebaseio.com/acData.json',
+  computers: 'https://e-cart-by-gabriel-default-rtdb.firebaseio.com/computerData.json',
+  fridges: 'https://e-cart-by-gabriel-default-rtdb.firebaseio.com/fridgeData.json',
+  tvs: 'https://e-cart-by-gabriel-default-rtdb.firebaseio.com/tvData.json',
+  watches: 'https://e-cart-by-gabriel-default-rtdb.firebaseio.com/watchData.json',
+};
+
+const categoryLabels = {
+  mobiles: "Mobiles",
+  acs: "Air Conditioners",
+  computers: "Laptops",
+  fridges: "Refrigerators",
+  tvs: "Televisions",
+  watches: "Watches",
 };
 
 const ProductPage = () => {
   const { category } = useParams();
-
   const [products, setProducts] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,19 +48,23 @@ const ProductPage = () => {
   useEffect(() => {
     const username = localStorage.getItem('username');
 
-
-
     const fetchData = async () => {
+      setLoading(true);
       try {
         const [productRes, wishlistRes] = await Promise.all([
           axios.get(apiEndpoints[category]),
-          axios.get('http://localhost:3001/wishlist'),
+          axios.get('https://e-cart-by-gabriel-default-rtdb.firebaseio.com/wishlist.json'),
         ]);
 
-        setProducts(productRes.data);
+        const productArray = productRes.data ? Object.values(productRes.data) : [];
+        setProducts(productArray);
 
         if (username) {
-          const userWishlist = wishlistRes.data.filter(item => item.username === username);
+          const wishlistArray = wishlistRes.data
+            ? Object.entries(wishlistRes.data).map(([key, val]) => ({ firebaseKey: key, ...val }))
+            : [];
+
+          const userWishlist = wishlistArray.filter(item => item.username === username);
           setWishlistItems(userWishlist);
         }
       } catch (error) {
@@ -67,7 +79,7 @@ const ProductPage = () => {
   }, [category]);
 
   const isInWishlist = (product) => {
-    return wishlistItems.some(
+    return wishlistItems?.some(
       item => item.model === product.model && item.company === product.company
     );
   };
@@ -80,22 +92,25 @@ const ProductPage = () => {
     }
 
     try {
-      const { data: wishlistData } = await axios.get('http://localhost:3001/wishlist');
+      const wishlistRes = await axios.get('https://e-cart-by-gabriel-default-rtdb.firebaseio.com/wishlist.json');
+      const wishlistArray = wishlistRes.data
+        ? Object.entries(wishlistRes.data).map(([key, val]) => ({ firebaseKey: key, ...val }))
+        : [];
 
-      const existing = wishlistData.find(
+      const existing = wishlistArray.find(
         item => item.model === product.model &&
-                item.company === product.company &&
-                item.username === username
+          item.company === product.company &&
+          item.username === username
       );
 
       if (existing) {
-        await axios.delete(`http://localhost:3001/wishlist/${existing.id}`);
-        setWishlistItems(prev => prev.filter(item => item.id !== existing.id));
+        await axios.delete(`https://e-cart-by-gabriel-default-rtdb.firebaseio.com/wishlist/${existing.firebaseKey}.json`);
+        setWishlistItems(prev => prev.filter(item => item.firebaseKey !== existing.firebaseKey));
         setSnackbar({ open: true, message: 'Removed from wishlist', severity: 'info' });
       } else {
         const newItem = { ...product, username };
-        const { data: addedItem } = await axios.post('http://localhost:3001/wishlist', newItem);
-        setWishlistItems(prev => [...prev, addedItem]);
+        const response = await axios.post(`https://e-cart-by-gabriel-default-rtdb.firebaseio.com/wishlist.json`, newItem);
+        setWishlistItems(prev => [...prev, { ...newItem, firebaseKey: response.data.name }]);
         setSnackbar({ open: true, message: 'Added to wishlist', severity: 'success' });
       }
 
@@ -115,11 +130,15 @@ const ProductPage = () => {
     }
 
     try {
-      const { data: cartItems } = await axios.get('http://localhost:3001/cart');
-      const alreadyInCart = cartItems.some(
+      const cartRes = await axios.get('https://e-cart-by-gabriel-default-rtdb.firebaseio.com/cart.json');
+      const cartArray = cartRes.data
+        ? Object.entries(cartRes.data).map(([key, val]) => ({ firebaseKey: key, ...val }))
+        : [];
+
+      const alreadyInCart = cartArray.some(
         item => item.model === product.model &&
-                item.company === product.company &&
-                item.username === username
+          item.company === product.company &&
+          item.username === username
       );
 
       if (alreadyInCart) {
@@ -127,7 +146,7 @@ const ProductPage = () => {
         return;
       }
 
-      await axios.post('http://localhost:3001/cart', {
+      await axios.post(`https://e-cart-by-gabriel-default-rtdb.firebaseio.com/cart.json`, {
         ...product,
         username,
         quantity: 1
@@ -143,9 +162,9 @@ const ProductPage = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, p: 8 ,background: 'linear-gradient(to bottom, #3399ff 0%, #6600cc 100%)'}}>
-      <Typography variant="h4" align="center" sx={{ mb: 4, textTransform: 'capitalize' }}>
-        {category}
+    <Box sx={{ flexGrow: 1, p: 8, background: "linear-gradient(to bottom, #00ff99 0%, #3366cc 100%)" }}>
+      <Typography variant="h4" align="center" sx={{ mb: 4 }}>
+        {categoryLabels[category] || category}
       </Typography>
 
       {loading ? (
@@ -155,53 +174,51 @@ const ProductPage = () => {
       ) : (
         <Grid container spacing={6} justifyContent="center">
           {products.map((product, index) => (
-            <Grid size ={{xs:12,sm:6,md:4,lg:3}} key={index}>
-              <div className='animate__animated animate__backInDown'>
-                  <Card sx={{ maxWidth: 245, mx: 'auto',borderRadius:'10px' }}>
-                    <CardMedia
-                      component="img"
-                      image={product.image || '/assets/fallback.jpg'}
-                      alt={product.model}
-                      onError={(e) => { e.target.src = '/assets/fallback.jpg'; }}
-                      sx={{ height: 200, objectFit: 'contain', mt: 2 }}
-                    />
-                    <Typography variant="h6" align="center">
-                      {product.company}
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+              <div className="animate__animated animate__backInDown">
+                <Card sx={{ maxWidth: 245, mx: 'auto', borderRadius: '10px' }}>
+                  <CardMedia
+                    component="img"
+                    image={product.image || '/assets/fallback.jpg'}
+                    alt={product.model}
+                    onError={(e) => { e.target.src = '/assets/fallback.jpg'; }}
+                    sx={{ height: 200, objectFit: 'contain', mt: 2 }}
+                  />
+                  <Typography variant="h6" align="center">{product.company}</Typography>
+
+                  <CardActions
+                    sx={{
+                      justifyContent: 'center',
+                      flexDirection: 'column',
+                      color: 'white',
+                      background: 'linear-gradient(to bottom, #000066 0%, #66ccff 100%)',
+                    }}
+                  >
+                    <Typography variant="body2" align="center" sx={{ mb: 1, height: 60 }}>
+                      {product.description}
                     </Typography>
-    
-                          <CardActions
-                            sx={{
-                              justifyContent: 'center',
-                              flexDirection: 'column',
-                              color: 'white',
-                              background: 'linear-gradient(to bottom, #000066 0%, #66ccff 100%)',
-                            }}
-                          >
-                            <Typography variant="body2" align="center" sx={{ mb: 1, height: 60 }}>
-                              {product.description}
-                            </Typography>
-                            <Typography variant="h6" align="center" color="white">
-                              ₹{product.price.toLocaleString('en-IN')}
-                            </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 1 }}>
-                              <Button
-                                variant="outlined"
-                                sx={{ color: 'white', backgroundColor: 'blue' }}
-                                onClick={() => handleAddToCart(product)}
-                              >
-                                Add to Cart
-                              </Button>
-                              <IconButton onClick={() => handleWishlistClick(product)}>
-                                <FavoriteIcon
-                                  sx={{
-                                    fontSize: 28,
-                                    color: isInWishlist(product) ? 'red' : '#404040',
-                                  }}
-                                />
-                              </IconButton>
-                            </Box>
-                          </CardActions>
-                  </Card>
+                    <Typography variant="h6" align="center" color="white">
+                      ₹{product.price?.toLocaleString('en-IN')}
+                    </Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 1 }}>
+                      <Button
+                        variant="outlined"
+                        sx={{ color: 'white', backgroundColor: 'blue' }}
+                        onClick={() => handleAddToCart(product)}
+                      >
+                        Add to Cart
+                      </Button>
+                      <IconButton onClick={() => handleWishlistClick(product)}>
+                        <FavoriteIcon
+                          sx={{
+                            fontSize: 28,
+                            color: isInWishlist(product) ? 'red' : '#404040',
+                          }}
+                        />
+                      </IconButton>
+                    </Box>
+                  </CardActions>
+                </Card>
               </div>
             </Grid>
           ))}
